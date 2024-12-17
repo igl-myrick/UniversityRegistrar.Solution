@@ -6,7 +6,7 @@ namespace UniversityRegistrar.Models
   {
     public DbSet<Course> Courses { get; set; }
     public DbSet<Student> Students { get; set; }
-    public DbSet<Enrollments> Enrollments { get; set; }
+    public DbSet<Enrollment> Enrollment { get; set; }
 
     public UniversityRegistrarContext(DbContextOptions options) : base(options) { }
   }
