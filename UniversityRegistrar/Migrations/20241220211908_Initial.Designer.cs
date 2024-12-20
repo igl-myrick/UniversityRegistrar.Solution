@@ -11,8 +11,8 @@ using UniversityRegistrar.Models;
 namespace UniversityRegistrar.Migrations
 {
     [DbContext(typeof(UniversityRegistrarContext))]
-    [Migration("20241219211857_AddCourseStudentJoinTable")]
-    partial class AddCourseStudentJoinTable
+    [Migration("20241220211908_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,21 +20,6 @@ namespace UniversityRegistrar.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "6.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
-
-            modelBuilder.Entity("CourseStudent", b =>
-                {
-                    b.Property<int>("CoursesCourseId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StudentsStudentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CoursesCourseId", "StudentsStudentId");
-
-                    b.HasIndex("StudentsStudentId");
-
-                    b.ToTable("CourseStudent");
-                });
 
             modelBuilder.Entity("UniversityRegistrar.Models.Course", b =>
                 {
@@ -74,27 +59,6 @@ namespace UniversityRegistrar.Migrations
                     b.ToTable("CourseStudents");
                 });
 
-            modelBuilder.Entity("UniversityRegistrar.Models.Enrollment", b =>
-                {
-                    b.Property<int>("EnrollmentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("CourseId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("EnrollmentId");
-
-                    b.HasIndex("CourseId");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("Enrollment");
-                });
-
             modelBuilder.Entity("UniversityRegistrar.Models.Student", b =>
                 {
                     b.Property<int>("StudentId")
@@ -112,21 +76,6 @@ namespace UniversityRegistrar.Migrations
                     b.ToTable("Students");
                 });
 
-            modelBuilder.Entity("CourseStudent", b =>
-                {
-                    b.HasOne("UniversityRegistrar.Models.Course", null)
-                        .WithMany()
-                        .HasForeignKey("CoursesCourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("UniversityRegistrar.Models.Student", null)
-                        .WithMany()
-                        .HasForeignKey("StudentsStudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("UniversityRegistrar.Models.CourseStudent", b =>
                 {
                     b.HasOne("UniversityRegistrar.Models.Course", "Course")
@@ -137,25 +86,6 @@ namespace UniversityRegistrar.Migrations
 
                     b.HasOne("UniversityRegistrar.Models.Student", "Student")
                         .WithMany("JoinEntities")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Course");
-
-                    b.Navigation("Student");
-                });
-
-            modelBuilder.Entity("UniversityRegistrar.Models.Enrollment", b =>
-                {
-                    b.HasOne("UniversityRegistrar.Models.Course", "Course")
-                        .WithMany()
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("UniversityRegistrar.Models.Student", "Student")
-                        .WithMany()
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
