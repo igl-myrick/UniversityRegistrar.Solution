@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using System;
 using UniversityRegistrar.Models;
 
 namespace UniversityRegistrar.Controllers
@@ -26,6 +25,14 @@ namespace UniversityRegistrar.Controllers
     public ActionResult Create()
     {
       return View();
+    }
+
+    [HttpPost]
+    public ActionResult Create(Student student)
+    {
+      _db.Students.Add(student);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
     }
   }
 }
