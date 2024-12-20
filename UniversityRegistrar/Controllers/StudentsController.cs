@@ -23,9 +23,9 @@ namespace UniversityRegistrar.Controllers
       return View(model);
     }
 
-    // public ActionResult Create()
-    // {
-    //   return View();
-    // }
+    public ActionResult Create()
+    {
+      return View();
+    }
   }
 }
