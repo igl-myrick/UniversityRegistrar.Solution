@@ -1,0 +1,19 @@
+@{
+  Layout = "_Layout";
+}
+
+@model UniversityRegistrar.Models.Student
+
+<h4>Add a new student</h4>
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.Name)
+  @Html.TextBoxFor(model => model.Name, new { required = "required" })
+
+  <label for="DateEnrolled">Date Enrolled:</label>
+  <input type="datetime-local" name="DateEnrolled" id="DateEnrolled">
+
+  <input type="submit" value="Add new student">
+}
+
+<p>@Html.ActionLink("Show all students", "Index")</p>
